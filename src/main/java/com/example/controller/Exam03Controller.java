@@ -20,8 +20,13 @@ public class Exam03Controller {
     }
 
     @PostMapping("/result")
-    public String result(){
-        application.setAttribute("sum", Integer.parseInt((String) application.getAttribute("product1")) + Integer.parseInt((String) application.getAttribute("product2")) + Integer.parseInt((String) application.getAttribute("product3")));
+    public String result(String product1, String product2, String product3){
+        application.setAttribute("sum", Integer.parseInt(product1) + Integer.parseInt(product2) + Integer.parseInt(product3));
+        return "exam03-result";
+    }
+
+    @GetMapping("/result")
+    public String showResult(){
         return "exam03-result";
     }
 }
