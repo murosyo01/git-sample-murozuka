@@ -2,6 +2,8 @@ package com.example.controller;
 
 import com.example.domain.User;
 import com.example.form.UserForm;
+import com.fasterxml.jackson.databind.util.BeanUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,29 +18,26 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class Exam04Controller {
 
     @GetMapping("")
-    public String index(){
-        return "redirect:/exam04/redirect";
-    }
-
-    @GetMapping("/redirect")
-    public String index2(UserForm userForm, Model model){
+    public String index(UserForm userForm, Model model){
         return "exam04";
     }
 
     @PostMapping("/result")
     public String result(@Validated UserForm userForm, BindingResult result, RedirectAttributes redirectAttributes, Model model){
         if (result.hasErrors()){
-            return index2(userForm,model);
+            return index(userForm,model);
         }
 
         User user = new User();
-
-        user.setName(userForm.getName());
-        user.setAge(userForm.getAge());
-        user.setComment(userForm.getComment());
+        BeanUtils.copyProperties(userForm, user);
 
         redirectAttributes.addFlashAttribute("user", user);
 
+        return "redirect:/exam04/showResult";
+    }
+
+    @GetMapping("/showResult")
+    public String showResult(){
         return "exam04-result";
     }
 }
