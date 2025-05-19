@@ -30,7 +30,7 @@
           <form th:action = "@{/exam06/delete}" method="post">
             <input type = "text" name = "index" th:value = ${status.index} hidden="hidden">
             <span th:text = "${product.name}">productName</span>　
-            <span th:text = "${#numbers.formatInteger(product.price, 3, 'COMMA')}">productPrice</span>円　
+            <span th:text = "${#numbers.formatInteger(product.price, 0, 'COMMA')}">productPrice</span>円　
             <button type="submit">削除</button>
           </form>
         </div>

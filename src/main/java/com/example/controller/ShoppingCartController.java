@@ -30,7 +30,7 @@ public class ShoppingCartController {
         @SuppressWarnings("unchecked")
         List<Item> productList = (List<Item>) application.getAttribute("productList");
 
-        if (application.getAttribute("productList") == null){
+        if (productList == null){
             Item item1 = new Item();
             item1.setName("手帳ノート");
             item1.setPrice(1000);
@@ -81,11 +81,7 @@ public class ShoppingCartController {
         @SuppressWarnings("unchecked")
         List<Item> productList = (List<Item>) application.getAttribute("productList");
 
-        System.out.println("index：" + index);
-
         shoppingCartList.add(productList.get(Integer.parseInt(index)));
-
-        System.out.println("shoppingCartList：" + shoppingCartList);
 
         session.setAttribute("shoppingCartList", shoppingCartList);
 

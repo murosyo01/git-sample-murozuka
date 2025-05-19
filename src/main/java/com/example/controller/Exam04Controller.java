@@ -18,14 +18,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class Exam04Controller {
 
     @GetMapping("")
-    public String index(UserForm userForm, Model model){
+    public String index(UserForm userForm){
         return "exam04";
     }
 
     @PostMapping("/result")
-    public String result(@Validated UserForm userForm, BindingResult result, RedirectAttributes redirectAttributes, Model model){
+    public String result(@Validated UserForm userForm, BindingResult result, RedirectAttributes redirectAttributes){
         if (result.hasErrors()){
-            return index(userForm,model);
+            return index(userForm);
         }
 
         User user = new User();
